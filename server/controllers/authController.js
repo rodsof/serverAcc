@@ -35,7 +35,7 @@ exports.autenticateUser = async (req, res) => {
 
         //  sign JWT
         jwt.sign(payload, process.env.SECRET, {
-            expiresIn: 3600 // 1 hour
+            expiresIn: 28800 // 8 hours
         }, (error, token) => {
             if(error) throw error;
 
@@ -50,7 +50,7 @@ exports.autenticateUser = async (req, res) => {
 
 
 // Get autenticated user 
-exports.userAutenticated = async (req, res) => {
+exports.userAutenticated = async (req, res, next) => {
     try {
         const user = await User.findById(req.user.user.id).select('-password');
         res.json({user});

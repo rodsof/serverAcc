@@ -13,6 +13,10 @@ const EventSchema = mongoose.Schema({
         type: String,
         required: true,
     },
+    host: {
+        type: String,
+        required: true
+    },
     date: {
         type: Date,
         required: true,
@@ -21,10 +25,10 @@ const EventSchema = mongoose.Schema({
         type: String,
         required: true
     },
-    creator: [{
+    creator: {
         type: mongoose.Schema.Types.ObjectId, 
         ref: 'User'
-    }]
+    }
 })
 
 module.exports = mongoose.model('Event', EventSchema);

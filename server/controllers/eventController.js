@@ -1,8 +1,7 @@
 const Event = require('../models/Event');
 const { validationResult } = require('express-validator');
 
-exports.createEvent = async (req, res) => {
-
+exports.createEvent = async (req, res, next) => {
     // check errors
     const errors = validationResult(req);
     if( !errors.isEmpty() ) {
@@ -15,7 +14,7 @@ exports.createEvent = async (req, res) => {
         const event = new Event(req.body);
 
         // Save the Creator via JWT
-        event.creator = req.user.id;
+        event.creator = req.user.user.id;
 
         // save event
         event.save();
@@ -30,7 +29,7 @@ exports.createEvent = async (req, res) => {
 // Get user's events
 exports.getEvents = async (req, res) => {
     try {
-        const events = await Event.find({ creator: req.user.id }).sort({ date: -1 });
+        const events = await Event.find().sort({ date: -1 });
         res.json({ events });
     } catch (error) {
         console.log(error);

@@ -42,7 +42,7 @@ exports.createUser = async (req, res) => {
 
         // sign el JWT
         jwt.sign(payload, process.env.SECRET, {
-            expiresIn: 3600 // 1 hour
+            expiresIn: 28800 // 8 hours
         }, (error, token) => {
             if(error) throw error;
 
@@ -56,9 +56,14 @@ exports.createUser = async (req, res) => {
     }
 }
 
-exports.getUsers = async (req, res) => {
-    let users = await User.find();
-    return res.json(users);
+// Get user by id
+exports.getUser = async (req, res, next) => {
+    try {
+        const user = await User.findById(req.query.id).select('-password');
+        res.json({user});
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({msg: 'There was an error'});
+    }
 }
-
 

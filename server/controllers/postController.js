@@ -32,9 +32,6 @@ exports.createPost = async (req, res) => {
 exports.getPosts = async (req, res) => {
     try {
         const posts = await Post.find().sort({ date: -1 });
-        for ( var i = 0 ; i < posts.length ; i++){
-            posts[i].creator = await User.findById(posts[i].creator).select('-password');;
-        }
         res.json({ posts });
     } catch (error) {
         console.log(error);
