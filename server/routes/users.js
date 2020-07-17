@@ -19,8 +19,7 @@ router.post(
 );
 
 router.get("/", 
-auth,
-userController.getUsers
- );
+auth, 
+userController.getUsers);
 
 module.exports = router;

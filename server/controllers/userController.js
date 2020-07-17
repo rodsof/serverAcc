@@ -56,7 +56,7 @@ exports.createUser = async (req, res) => {
     }
 }
 
-exports.getUsers= async (req, res) => {
+exports.getUsers = async (req, res) => {
     let users = await User.find();
     return res.json(users);
 }

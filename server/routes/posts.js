@@ -20,6 +20,7 @@ router.post('/',
 
 // Get posts
 router.get('/', 
+    auth,
     postController.getPosts
 )
 
