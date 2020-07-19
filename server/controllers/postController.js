@@ -16,7 +16,7 @@ exports.createPost = async (req, res) => {
         const post = new Post(req.body);
 
         // Save the Creator via JWT
-        post.creator = req.user.id;
+        post.creator = req.user.user.id;
 
         // save post
         post.save();
